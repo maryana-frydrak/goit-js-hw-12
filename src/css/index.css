@@ -1,0 +1,116 @@
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+input[type='text'] {
+  width: 272px;
+  height: 34px;
+  border-radius: 4px;
+}
+
+input[type='text']:hover {
+  border-color: black;
+}
+
+input[type='text']:active {
+  border-color: #4e75ff;
+}
+
+button[type='submit'] {
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 91px;
+  height: 40px;
+
+  background-color: #4e75ff;
+}
+
+button[type='submit']:hover {
+  background-color: #6c8cff;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  display: none;
+  margin: 20px auto;
+}
+
+.loader.is-visible {
+  display: block;
+}
+
+/* HTML: <div class="loader"></div> */
+/*.loader {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  --c: no-repeat linear-gradient(#25b09b 0 0);
+  background:
+    var(--c) center/100% 10px,
+    var(--c) center/10px 100%;
+}
+.loader:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    var(--c) 0 0,
+    var(--c) 100% 0,
+    var(--c) 0 100%,
+    var(--c) 100% 100%;
+  background-size: 15.5px 15.5px;
+  animation: l16 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+@keyframes l16 {
+  33% {
+    inset: -10px;
+    transform: rotate(0deg);
+  }
+  66% {
+    inset: -10px;
+    transform: rotate(90deg);
+  }
+  100% {
+    inset: 0;
+    transform: rotate(90deg);
+  }
+}*/
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  --_c: no-repeat radial-gradient(farthest-side, #25b09b 92%, #0000);
+  background:
+    var(--_c) top,
+    var(--_c) left,
+    var(--_c) right,
+    var(--_c) bottom;
+  background-size: 12px 12px;
+  animation: l7 1s infinite;
+}
+@keyframes l7 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+
+.load-more {
+  border-radius: 4px;
+  width: 100px;
+  height: 30px;
+
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.load-more:hover {
+  background-color: #6c8cff;
+}
