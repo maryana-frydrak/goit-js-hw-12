@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { hideLoader, showLoader } from './render-functions';
 
 export async function getImagesByQuery(query, page) {
   const API_KEY = '54988394-76eeb0dc25d7c96559704c852';
@@ -20,7 +19,6 @@ export async function getImagesByQuery(query, page) {
 
     return res.data;
   } catch (error) {
-    console.error('Помилка запиту:', error.message);
-    throw new Error('Помилка завантажених даних');
+    throw new Error('Помилка завантажених даних', { cause: error });
   }
 }

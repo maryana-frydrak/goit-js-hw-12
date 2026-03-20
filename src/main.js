@@ -20,7 +20,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 const gallery = document.querySelector('.gallery');
 
 form.addEventListener('submit', onSearch);
-loadMoreBtn.addEventListener('click', onSearch);
+loadMoreBtn.addEventListener('click', onLoadMore);
 
 const showError = message => {
   iziToast.error({
@@ -45,8 +45,20 @@ async function onSearch(e) {
   showLoader();
   hideLoadMoreButton();
 
+  await requestImages();
+}
+
+async function onLoadMore() {
+  page += 1;
+  hideLoadMoreButton();
+
+  await requestImages();
+  smoothScroll();
+}
+
+async function requestImages() {
   try {
-    const data = await getImagesByQuery(query);
+    const data = await getImagesByQuery(query, page);
     const totalHits = data.totalHits;
 
     if (data.hits.length === 0) {
@@ -72,6 +84,17 @@ async function onSearch(e) {
     showError(`Something went wrong. Please try again later`);
   } finally {
     hideLoader();
-    hideLoadMoreButton();
+    showLoadMoreButton();
   }
+}
+
+function smoothScroll() {
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .lastElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
 }
