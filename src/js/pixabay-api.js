@@ -24,25 +24,3 @@ export async function getImagesByQuery(query, page) {
     throw new Error('Помилка завантажених даних');
   }
 }
-
-axios.interceptors.request.use(
-  function (config) {
-    showLoader();
-    return config;
-  },
-  function (error) {
-    hideLoader();
-    return Promise.reject(error);
-  }
-);
-
-axios.interceptors.response.use(
-  function (response) {
-    hideLoader();
-    return response;
-  },
-  function (error) {
-    hideLoader();
-    return Promise.reject(error);
-  }
-);
