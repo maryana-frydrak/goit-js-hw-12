@@ -20,7 +20,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 const gallery = document.querySelector('.gallery');
 
 form.addEventListener('submit', onSearch);
-loadMoreBtn.addEventListener('click', onLoadMore);
+loadMoreBtn.addEventListener('click', onSearch);
 
 const showError = message => {
   iziToast.error({
