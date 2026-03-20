@@ -34,7 +34,7 @@ const showError = message => {
 
 async function onSearch(e) {
   e.preventDefault();
-  const query = e.currentTarget.elements.query.value.trim();
+  query = e.currentTarget.elements.query.value.trim();
   if (!query) {
     iziToast.warning({ message: 'Please enter a search query!' });
     return;
@@ -42,14 +42,16 @@ async function onSearch(e) {
 
   page = 1;
   clearGallery();
-  showLoader();
   hideLoadMoreButton();
+  showLoader();
 
   await requestImages();
 }
 
 async function onLoadMore() {
   page += 1;
+
+  showLoader();
   hideLoadMoreButton();
 
   await requestImages();
@@ -77,6 +79,7 @@ async function requestImages() {
       iziToast.info({
         message: 'We`re sorry, but you`ve reached the end of search results.',
       });
+      hideLoadMoreButton();
     } else {
       showLoadMoreButton();
     }
@@ -84,7 +87,6 @@ async function requestImages() {
     showError(`Something went wrong. Please try again later`);
   } finally {
     hideLoader();
-    showLoadMoreButton();
   }
 }
 
