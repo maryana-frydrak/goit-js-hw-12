@@ -7,41 +7,50 @@ import {
   clearGallery,
   showLoader,
   hideLoader,
+  hideLoadMoreButton,
 } from './js/render-functions.js';
 
 const form = document.querySelector('.form');
 
-form.addEventListener('submit', e => {
+const showError = message => {
+  iziToast.error({
+    message,
+    background: '#ef4040',
+    position: 'topRight',
+    width: '432',
+    height: '88',
+  });
+};
+
+hideLoadMoreButton();
+
+const onSearch = async e => {
   e.preventDefault();
   const query = e.currentTarget.elements.query.value.trim();
+  page = 1;
 
   if (!query) return;
 
   clearGallery();
   showLoader();
+  hideLoadMoreButton();
 
-  getImagesByQuery(query)
-    .then(data => {
-      if (data.hits.length === 0) {
-        iziToast.error({
-          message: `Sorry, there are no images matching your search query. Please try again!`,
-          background: '#ef4040',
-          position: 'topRight',
-          width: '432',
-          height: '88',
-        });
-      } else {
-        createGallery(data.hits);
-      }
-    })
-    .catch(error =>
-      iziToast.error({
-        message: `Sorry, there are no images matching your search query. Please try again!`,
-        background: '#ef4040',
-        position: 'topRight',
-        width: '432',
-        height: '88',
-      })
-    )
-    .finally(() => hideLoader());
-});
+  try {
+    const data = await getImagesByQuery(query);
+
+    if (data.hits.length === 0) {
+      showError(
+        `Sorry, there are no images matching your search query. Please try again!`
+      );
+      return;
+    }
+
+    createGallery(data.hits);
+  } catch (error) {
+    showError(`Something went wrong. Please try again later`);
+  } finally {
+    hideLoader();
+  }
+};
+
+form.addEventListener('submit', onSearch);

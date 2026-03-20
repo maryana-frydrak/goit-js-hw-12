@@ -55,15 +55,15 @@ export function hideLoader() {
 }
 
 export function showLoadMoreButton() {
-  const LoadMoreButton = document.querySelector('.load-more');
-  if (LoadMoreButton) {
-    LoadMoreButton.classList.remove('is-hidden');
+  const showLoadMoreButton = document.querySelector('.load-more');
+  if (showLoadMoreButton) {
+    showLoadMoreButton.classList.remove('is-hidden');
   }
 }
 
 export function hideLoadMoreButton() {
-  const LoadMoreButton = document.querySelector('.load-more');
-  if (LoadMoreButtonr) {
-    LoadMoreButton.classList.add('is-hidden');
+  const hideLoadMoreButton = document.querySelector('.load-more');
+  if (hideLoadMoreButton) {
+    hideLoadMoreButton.classList.add('is-hidden');
   }
 }
